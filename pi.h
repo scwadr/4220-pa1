@@ -29,6 +29,7 @@ double pi_calc(long int n) {
         if (x * x + y * y - 1.0 <= 0.0) {
             sum++;
         }
+        std::cerr << j << '\n';
     }
     
     long int global_count = 0;
