@@ -32,7 +32,7 @@ double pi_calc(long int n) {
         std::cerr << j << '\n';
     }
     
-    long int global_count = 0;
+    long int global_sum = 0;
     MPI_Reduce(&sum, &global_sum, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
 
     // Only rank 0 calculates the final Pi value
