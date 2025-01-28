@@ -21,7 +21,7 @@ double pi_calc(long int n) {
 
     int bibis = n % p;
     long int sum = 0;
-    for (int j = 0; j < ((rank < bibis) ? n / p : n / p + 1); j++) 
+    for (int j = 0; j < ((rank < bibis) ? n / p + 1 : n / p); j++) 
     {
         srand(time(NULL) + rank);
         long double x = (1.0 * rand()) / RAND_MAX;
@@ -29,9 +29,8 @@ double pi_calc(long int n) {
         if (x * x + y * y - 1.0 <= 0.0) {
             sum++;
         }
-        std::cerr << j << '\n';
     }
-    
+    std:cerr << sum << '\n';
     long int global_sum = 0;
     MPI_Reduce(&sum, &global_sum, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
 
