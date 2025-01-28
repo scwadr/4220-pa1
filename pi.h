@@ -18,19 +18,20 @@ double pi_calc(long int n) {
     int rank, p;
     MPI_Comm_size(MPI_COMM_WORLD, &p);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    
     srand(time(NULL) + rank);
 
-    int bibis = n % p;
     long int sum = 0;
-    for (int j = 0; j < ((rank < bibis) ? n / p + 1 : n / p); j++) 
+    int upper_bound = (rank < n % p) ? n / p + 1 : n / p;
+    long double x, y;
+
+    for (int j = 0; j < upper_bound; j++) 
     {
-        long double x = (1.0 * rand()) / RAND_MAX;
-        long double y = (1.0 * rand()) / RAND_MAX;
-        if (x * x + y * y - 1.0 <= 0.0) {
-            sum++;
-        }
+        x = (1.0 * rand()) / RAND_MAX;
+        y = (1.0 * rand()) / RAND_MAX;
+        sum += (x * x + y * y - 1.0 <= 0.0);
     }
-    std::cerr << sum << '\n';
+
     long int global_sum = 0;
     MPI_Reduce(&sum, &global_sum, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
 
