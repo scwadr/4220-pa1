@@ -30,7 +30,7 @@ double pi_calc(long int n) {
             sum++;
         }
     }
-    std:cerr << sum << '\n';
+    std::cerr << sum << '\n';
     long int global_sum = 0;
     MPI_Reduce(&sum, &global_sum, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
 
