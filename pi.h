@@ -33,12 +33,12 @@ double pi_calc(long int n) {
     }
     
     long int global_count = 0;
-    MPI_Reduce(&count, &global_count, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&sum, &global_sum, 1, MPI_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
 
     // Only rank 0 calculates the final Pi value
     if (rank == 0) 
     {
-        return 4.0 * global_count / n;
+        return 4.0 * global_sum / n;
     }
 
     ////////////////////////////////////////
